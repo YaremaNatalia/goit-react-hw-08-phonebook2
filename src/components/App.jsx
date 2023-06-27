@@ -1,16 +1,26 @@
+import { Searchbar } from './Searchbar';
+import { ImageGallery } from './ImageGallery';
+import { ImageGalleryItem } from './ImageGalleryItem';
+import { Loader } from './Loader';
+import { Button } from './Button';
+// import { Modal } from './Modal';
+
 export const App = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 30,
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        gridGap: 16,
+        paddingBottom: 24,
       }}
     >
-      React homework template
+      <Searchbar />
+      <ImageGallery />
+      <ImageGalleryItem />
+      <Loader />
+      <Button />
+      {/* <Modal /> */}
     </div>
   );
 };
