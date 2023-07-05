@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 
 export const ImageGalleryItem = ({ webformatURL, tags, onOpenModal }) => {
   return (
-    <li className={css.imageGalleryItem}>
+    <li className={css.imageGalleryItem} onClick={onOpenModal}>
       <img
         className={css.imageGalleryItemImage}
         src={webformatURL}
         alt={tags}
-        onClick={onOpenModal}
       />
     </li>
   );

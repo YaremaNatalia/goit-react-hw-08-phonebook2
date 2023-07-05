@@ -10,7 +10,7 @@ export const ImageGallery = ({ images, onOpenModal }) => {
           key={id}
           tags={tags}
           webformatURL={webformatURL}
-          onOpenModal={() => onOpenModal(largeImageURL)}
+          onOpenModal={() => onOpenModal(largeImageURL, tags)}
         ></ImageGalleryItem>
       ))}
     </ul>
