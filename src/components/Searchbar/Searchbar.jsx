@@ -16,7 +16,6 @@ export class Searchbar extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.inputValue.trim() === '') {
-      // this.props.onSubmit('');
       return toast.warning('Oops, no value...');
     }
     this.props.onSubmit(this.state.inputValue);

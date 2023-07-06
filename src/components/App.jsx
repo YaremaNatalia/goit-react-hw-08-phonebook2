@@ -22,7 +22,7 @@ export class App extends React.Component {
     tags: '',
   };
 
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       prevState.page !== this.state.page ||
       prevState.query !== this.state.query
@@ -45,10 +45,7 @@ export class App extends React.Component {
         total: totalHits,
       }));
     } catch (error) {
-      if (!this.state.error) {
-        this.setState({ error: error.message });
-        toast.error(error.message);
-      }
+      this.setState({ error: error.message });
     } finally {
       this.setState({ isLoading: false });
     }
@@ -61,22 +58,6 @@ export class App extends React.Component {
       page: 1,
     });
   };
-
-  // onSubmit = inputValue => {
-  //   if (inputValue === "") {
-  //     this.setState({
-  //       images: [],
-  //        query: "",
-  //       page: 1,
-  //       total: 0,
-  //     });
-  //   } else {
-  //   this.setState({
-  //     query: inputValue,
-  //     images: [],
-  //     page: 1,
-  //   });
-  // };
 
   onLoadMore = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
@@ -119,7 +100,7 @@ export class App extends React.Component {
           <ImageGallery images={images} onOpenModal={this.onOpenModal} />
         )}
         {isLoading && <Loader />}
-        {totalPages > 1 && images.length > 0 && (
+        {totalPages > 1 && !isLoading && images.length > 0 && (
           <Button onLoadMore={this.onLoadMore} />
         )}
 
