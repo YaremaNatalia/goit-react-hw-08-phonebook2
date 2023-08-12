@@ -8,10 +8,15 @@ import { addContact } from '../../redux/phonebookReducer';
 import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectContacts); //підписуємось на state.phonebook.contacts з файлу selectors.js
+
+  //хук useSelector(selector). Аргументом він приймає функцію, яка оголошує один параметр state - весь об'єкт стану Redux, який буде автоматично переданий функції хуком useSelector.
+  //Ця функція називається селектором і повинна повернути тільки ту частину стану, яка необхідна компоненту.
+  // const value = useSelector(state => state.some.value)
+
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState(''); // використовуємо локальний стейт для роботи з інпутами
   const [number, setNumber] = useState('');
 
   const onChangeInput = event => {
@@ -48,8 +53,8 @@ export const ContactForm = () => {
       );
     }
 
-    dispatch(addContact(contactData));
-    setName('');
+    dispatch(addContact(contactData)); // діспатчимо (спрямовуємо) екшн addContact в payload якого передаємо contactData для запису у стейт
+    setName(''); // очищуємо стейт (поля інпутів)
     setNumber('');
   };
 

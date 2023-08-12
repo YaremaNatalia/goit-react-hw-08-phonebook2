@@ -17,7 +17,7 @@ const phonebookPersistConfig = {
   key: 'phonebook',
   storage,
   whitelist: ['contacts'],
-};
+}; // persist для зберігання в локалсторедж. Відслідклвуємо тільки contacts
 
 export const store = configureStore({
   reducer: {
@@ -32,4 +32,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-

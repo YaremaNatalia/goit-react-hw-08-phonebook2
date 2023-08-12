@@ -5,12 +5,12 @@ import { deleteContact } from '../../redux/phonebookReducer';
 import { selectVisibleContacts } from 'redux/selectors';
 
 export const ContactList = () => {
-  const filteredContacts = useSelector(selectVisibleContacts);
+  const filteredContacts = useSelector(selectVisibleContacts); //відображення відфільтрованих контактів
 
   const dispatch = useDispatch();
 
   const onRemoveContact = contactId => {
-    dispatch(deleteContact(contactId));
+    dispatch(deleteContact(contactId)); //передаємо id в пейлоад екшн deleteContact, для видалення
   };
 
   return (

@@ -10,13 +10,13 @@ const phonebookSlice = createSlice({
   initialState,
   reducers: {
     addContact: (state, { payload }) => {
-      state.contacts.push(payload);
+      state.contacts.push(payload); // Додаємо контакти в масив з payload
     },
 
     deleteContact: (state, action) => {
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload
-      );
+      ); // перезаписуємо відфільтрований масив контаків, що не містить id з payload
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
