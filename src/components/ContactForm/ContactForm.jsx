@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addContact } from '../../redux/phonebookReducer';
-import { selectVisibleContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
-  const contacts = useSelector(selectVisibleContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
