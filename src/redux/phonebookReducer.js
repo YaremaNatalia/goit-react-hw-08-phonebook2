@@ -10,8 +10,9 @@ const phonebookSlice = createSlice({
   initialState,
   reducers: {
     addContact: (state, { payload }) => {
-      state.contacts = state.contacts.push(payload);
+      state.contacts.push(payload);
     },
+
     deleteContact: (state, action) => {
       state.contacts = state.contacts.filter(
         contact => contact.id !== action.payload

@@ -2,18 +2,12 @@ import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteContact } from '../../redux/phonebookReducer';
+import { selectVisibleContacts } from 'redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.phonebook.contacts);
-  const filter = useSelector(state => state.phonebook.filter);
+  const filteredContacts = useSelector(selectVisibleContacts);
 
   const dispatch = useDispatch();
-
-  const filteredContacts = contacts.filter(
-    contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()) ||
-      contact.number.includes(filter)
-  );
 
   const onRemoveContact = contactId => {
     dispatch(deleteContact(contactId));

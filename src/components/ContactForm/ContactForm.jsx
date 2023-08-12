@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addContact } from '../../redux/phonebookReducer';
+import { selectVisibleContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
-  const contacts = useSelector(state => state.phonebook.contacts);
+  const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -15,10 +16,15 @@ export const ContactForm = () => {
 
   const onChangeInput = event => {
     const { name, value } = event.target;
-    if (name === 'name') {
-      setName(value);
-    } else if (name === 'number') {
-      setNumber(value);
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
     }
   };
 
@@ -43,6 +49,8 @@ export const ContactForm = () => {
     }
 
     dispatch(addContact(contactData));
+    setName('');
+    setNumber('');
   };
 
   return (
