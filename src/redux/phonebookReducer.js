@@ -1,28 +1,109 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  fetchGetContacts,
+  fetchAddContact,
+  fetchDeleteContact,
+} from '../services/api';
 
 const initialState = {
   contacts: [],
+  isLoading: false,
+  error: null,
   filter: '',
 };
+
+export const fetchContactsThunk = createAsyncThunk(
+  'contacts/fetchAll',
+  async (_, thunkApi) => {
+    try {
+      const contacts = await fetchGetContacts();
+      return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addContactThunk = createAsyncThunk(
+  'contacts/addContact',
+  async (contact, thunkApi) => {
+    try {
+      const contacts = await fetchAddContact(contact);
+      return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteContactThunk = createAsyncThunk(
+  'contacts/deleteContact',
+  async (contactId, thunkApi) => {
+    try {
+      const contacts = await fetchDeleteContact(contactId);
+      return contacts;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
 const phonebookSlice = createSlice({
   name: 'phonebook',
   initialState,
   reducers: {
-    addContact: (state, { payload }) => {
-      state.contacts.push(payload); // Додаємо контакти в масив з payload
-    },
-
-    deleteContact: (state, action) => {
-      state.contacts = state.contacts.filter(
-        contact => contact.id !== action.payload
-      ); // перезаписуємо відфільтрований масив контаків, що не містить id з payload
-    },
-    setFilter: (state, action) => {
-      state.filter = action.payload;
+    setFilter(state, actions) {
+      state.filter = actions.payload;
     },
   },
+  extraReducers: builder =>
+    builder
+      .addCase(fetchContactsThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchContactsThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.comments = action.payload;
+      })
+      .addCase(fetchContactsThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // ================== ADD CONTACT ==================
+      .addCase(addContactThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addContactThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.contacts.push(action.payload);
+      })
+      .addCase(addContactThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      // ================== DELETE CONTACT ==================
+      .addCase(deleteContactThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.contacts = state.contacts.filter(
+          contact => contact.id !== action.payload
+        );
+
+        // const deletedContactIndex = state.contacts.findIndex(
+        //   contact => contact.id === action.payload
+        // );
+        // state.contacts.splice(deletedContactIndex, 1)
+      })
+      .addCase(deleteContactThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      }),
 });
 
-export const { addContact, deleteContact, setFilter } = phonebookSlice.actions;
+export const { setFilter } = phonebookSlice.actions;
 export const phonebookReducer = phonebookSlice.reducer;

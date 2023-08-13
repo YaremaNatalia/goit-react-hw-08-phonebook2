@@ -1,16 +1,22 @@
+import { useEffect } from 'react';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteContactThunk, fetchContactsThunk } from 'redux/phonebookReducer';
 
-import { deleteContact } from '../../redux/phonebookReducer';
 import { selectVisibleContacts } from 'redux/selectors';
 
 export const ContactList = () => {
-  const filteredContacts = useSelector(selectVisibleContacts); //відображення відфільтрованих контактів
-
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchContactsThunk());
+  }, [dispatch]);
+
+  const filteredContacts = useSelector(selectVisibleContacts);
+  console.log(filteredContacts);
+
   const onRemoveContact = contactId => {
-    dispatch(deleteContact(contactId)); //передаємо id в пейлоад екшн deleteContact, для видалення
+    dispatch(deleteContactThunk(contactId));
   };
 
   return (
