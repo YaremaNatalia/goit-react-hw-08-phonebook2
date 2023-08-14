@@ -13,7 +13,6 @@ export const ContactList = () => {
   }, [dispatch]);
 
   const filteredContacts = useSelector(selectVisibleContacts);
-  console.log(filteredContacts);
 
   const onRemoveContact = contactId => {
     dispatch(deleteContactThunk(contactId));
@@ -21,10 +20,10 @@ export const ContactList = () => {
 
   return (
     <ul className={css.contactList}>
-      {filteredContacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, phone }) => (
         <li key={id} className={css.contactItem}>
           <p className={css.contactName}>{name}:</p>
-          <span className={css.contactNumber}>{number}</span>
+          <span className={css.contactNumber}>{phone}</span>
           <button
             type="button"
             className={css.removeBtn}

@@ -13,7 +13,7 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const onChangeInput = event => {
     const { name, value } = event.target;
@@ -21,8 +21,8 @@ export const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         return;
@@ -33,25 +33,25 @@ export const ContactForm = () => {
     event.preventDefault();
     const contactData = {
       name,
-      number: number.replace(/[\s()-]+/g, ''),
+      phone: phone.replace(/[\s()-]+/g, ''),
       id: nanoid(),
     };
 
     const isDuplicateName = contacts.some(
       contact =>
         contact.name.toLowerCase() === name.toLowerCase() ||
-        contact.number === number
+        contact.phone === phone
     );
 
     if (isDuplicateName) {
       return Notiflix.Notify.failure(
-        `${name} or ${number} is already in contacts!`
+        `${name} or ${phone} is already in contacts!`
       );
     }
 
     dispatch(addContactThunk(contactData));
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -81,11 +81,11 @@ export const ContactForm = () => {
         <input
           className={css.formInput}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
-          value={number}
+          value={phone}
           onChange={onChangeInput}
         />
       </div>

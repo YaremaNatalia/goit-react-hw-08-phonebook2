@@ -1,7 +1,7 @@
 import css from './Filter.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'redux/phonebookReducer';
 
-import { setFilter } from '../../redux/phonebookReducer';
 import { selectFilter } from 'redux/selectors';
 
 export const Filter = () => {

@@ -64,7 +64,7 @@ const phonebookSlice = createSlice({
       })
       .addCase(fetchContactsThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.comments = action.payload;
+        state.contacts = action.payload;
       })
       .addCase(fetchContactsThunk.rejected, (state, action) => {
         state.isLoading = false;
@@ -90,14 +90,16 @@ const phonebookSlice = createSlice({
       })
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = state.contacts.filter(
-          contact => contact.id !== action.payload
-        );
-
-        // const deletedContactIndex = state.contacts.findIndex(
-        //   contact => contact.id === action.payload
+      
+        // const deletedContactId = action.payload.id;
+        // state.contacts = state.contacts.filter(
+        //   contact => contact.id !== deletedContactId
         // );
-        // state.contacts.splice(deletedContactIndex, 1)
+
+        const deletedContactIndex = state.contacts.findIndex(
+          contact => contact.id === action.payload.id
+        );
+        state.contacts.splice(deletedContactIndex, 1);
       })
       .addCase(deleteContactThunk.rejected, (state, action) => {
         state.isLoading = false;
