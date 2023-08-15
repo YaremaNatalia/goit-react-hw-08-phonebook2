@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 import Notiflix from 'notiflix';
 import { useState } from 'react';
@@ -34,7 +33,6 @@ export const ContactForm = () => {
     const contactData = {
       name,
       phone: phone.replace(/[\s()-]+/g, ''),
-      id: nanoid(),
     };
 
     const isDuplicateName = contacts.some(
