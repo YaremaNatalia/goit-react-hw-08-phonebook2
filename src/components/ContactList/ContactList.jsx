@@ -1,40 +1,44 @@
-import { useEffect } from 'react';
-import css from './ContactList.module.css';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContactThunk, fetchContactsThunk } from 'redux/phonebookReducer';
-
-import { selectVisibleContacts } from 'redux/selectors';
+import { deleteContactThunk } from 'redux/contactsServices';
+import { selectUserContacts } from 'redux/selectors';
+import {
+  ContactItem,
+  ContactName,
+  ContactNumber,
+  ContactUl,
+  RemoveBtn,
+} from './ContactList.styled';
+import { FormTitle } from 'pages/RegisterPage.styled';
 
 export const ContactList = () => {
+  const contacts = useSelector(selectUserContacts);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContactsThunk());
-  }, [dispatch]);
-
-  const filteredContacts = useSelector(selectVisibleContacts);
-
-  const onRemoveContact = contactId => {
+  const handleDeleteContact = contactId => {
     dispatch(deleteContactThunk(contactId));
   };
-
   return (
-    <ul className={css.contactList}>
-      {filteredContacts.map(({ id, name, phone }) => (
-        <li key={id} className={css.contactItem}>
-          <p className={css.contactName}>{name}:</p>
-          <span className={css.contactNumber}>{phone}</span>
-          <button
-            type="button"
-            className={css.removeBtn}
-            onClick={() => {
-              onRemoveContact(id);
-            }}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <FormTitle>Your contacts</FormTitle>
+      <ContactUl>
+        {contacts.map(contact => {
+          return (
+            <ContactItem key={contact.id}>
+              <ContactName>{contact.name}</ContactName>
+              <ContactNumber>{contact.number}</ContactNumber>
+              <RemoveBtn
+                onClick={() => handleDeleteContact(contact.id)}
+                type="button"
+                aria-label="Delete contact"
+              >
+                &times;
+              </RemoveBtn>
+            </ContactItem>
+          );
+        })}
+      </ContactUl>
+    </div>
   );
 };
