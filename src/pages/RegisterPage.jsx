@@ -43,6 +43,7 @@ const RegisterPage = () => {
           <FormInput
             type="text"
             name="name"
+            id="name"
             placeholder="Enter your username"
             required
             minLength={2}
@@ -53,9 +54,11 @@ const RegisterPage = () => {
           <p>Email:</p>
           <FormInput
             type="email"
+            id="email"
             name="email"
             placeholder="Enter your email"
             required
+            autoComplete="on"
           />
         </FormLabel>
 
@@ -63,10 +66,12 @@ const RegisterPage = () => {
           <p>Password:</p>
           <FormInput
             name="password"
+            id="password"
             type="password"
             placeholder="Enter your password"
             required
             minLength={7}
+            autocomplete="current-password"
           />
         </FormLabel>
 

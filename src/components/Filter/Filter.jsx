@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectFilteredContacts } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
 import { setFilter } from 'redux/contactsReducer';
 import { FormGroup } from './Filter.styled';
 import { FormInput, FormLabel } from 'pages/RegisterPage.styled';
 
 export const Filter = () => {
-  const filter = useSelector(selectFilteredContacts);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const onFilterChange = event => {
@@ -19,7 +19,7 @@ export const Filter = () => {
         <p>Find contacts by name or phone number:</p>
         <FormInput
           type="text"
-          placeholder="Enter letters, digits, apostrophe, dash and spaces, and can start with +"
+          placeholder="Enter letters or digits to filter your contacts"
           required
           value={filter}
           onChange={onFilterChange}

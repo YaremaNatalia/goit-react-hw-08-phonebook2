@@ -52,6 +52,7 @@ const ContactsPage = () => {
         contact.number === number
     );
     if (isDuplicateName) {
+      form.reset();
       return Notiflix.Notify.failure(
         `Contact with name ${name} or phone number ${number} is already in contacts!`
       );
@@ -64,7 +65,9 @@ const ContactsPage = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {error && <p>Oops something went wrong... {error}</p>}
+      {error && (
+        <p className="errorMessage">Whoops, something went wrong: {error}</p>
+      )}
       <section>
         <FormContainer>
           <FormTitle>Add new contact</FormTitle>
@@ -93,8 +96,8 @@ const ContactsPage = () => {
 
             <FormButton type="submit">Add contact</FormButton>
           </FormStyled>
-          {contacts && <Filter />}
-          {contacts && <ContactList />}
+          {contacts && contacts.length > 0 && <Filter />}
+          {contacts && contacts.length > 0 && <ContactList />}
         </FormContainer>
       </section>
     </div>

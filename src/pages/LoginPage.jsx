@@ -42,8 +42,10 @@ const LoginPage = () => {
           <FormInput
             type="email"
             name="email"
+            id="email"
             placeholder="Enter your email"
             required
+            autoComplete="on"
           />
         </FormLabel>
 
@@ -51,10 +53,12 @@ const LoginPage = () => {
           <p>Password:</p>
           <FormInput
             name="password"
+            id="password"
             type="password"
             placeholder="Enter your password"
             required
             minLength={7}
+            autocomplete="current-password"
           />
         </FormLabel>
 

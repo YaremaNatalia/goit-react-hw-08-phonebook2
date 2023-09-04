@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContactThunk } from 'redux/contactsServices';
-import { selectUserContacts } from 'redux/selectors';
+import { selectFilteredContacts } from 'redux/selectors';
 import {
   ContactItem,
   ContactName,
@@ -12,7 +12,7 @@ import {
 import { FormTitle } from 'pages/RegisterPage.styled';
 
 export const ContactList = () => {
-  const contacts = useSelector(selectUserContacts);
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ export const ContactList = () => {
     <div>
       <FormTitle>Your contacts</FormTitle>
       <ContactUl>
-        {contacts.map(contact => {
+        {filteredContacts.map(contact => {
           return (
             <ContactItem key={contact.id}>
               <ContactName>{contact.name}</ContactName>
