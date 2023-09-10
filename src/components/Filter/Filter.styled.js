@@ -8,4 +8,9 @@ export const FormGroup = styled.form`
   width: 480px;
 `;
 
+export const FormLabel = styled.label`
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+`;
 

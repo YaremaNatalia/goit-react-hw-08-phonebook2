@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
-  /* background-color: #ddd8d8; */
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
@@ -19,7 +18,7 @@ export const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
       url('./wallpaper.jpg');
     background-size: cover;
     z-index: -1;

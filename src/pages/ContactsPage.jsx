@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Notiflix from 'notiflix';
-
+import { Button, Form, Input } from 'antd';
 import {
   selectAuthentificated,
   selectContactsError,
@@ -10,14 +10,7 @@ import {
 } from 'redux/selectors';
 import { addContactThunk, requestContactsThunk } from 'redux/contactsServices';
 import { Loader } from 'components/Loader';
-import {
-  FormButton,
-  FormContainer,
-  FormInput,
-  FormLabel,
-  FormStyled,
-  FormTitle,
-} from './RegisterPage.styled';
+import { FormContainer, FormTitle } from './RegisterPage.styled';
 import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 
@@ -71,7 +64,66 @@ const ContactsPage = () => {
       <section>
         <FormContainer>
           <FormTitle>Add new contact</FormTitle>
-          <FormStyled onSubmit={handleSubmit}>
+          <Form
+            onSubmit={handleSubmit}
+            name="wrap"
+            labelCol={{
+              flex: '110px',
+            }}
+            labelAlign="left"
+            labelWrap
+            wrapperCol={{
+              flex: 1,
+            }}
+            colon={false}
+            style={{
+              maxWidth: 600,
+            }}
+          >
+            <Form.Item
+              label="Name"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input
+                type="text"
+                name="contactName"
+                title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                placeholder="Enter name"
+                required
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Number"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input
+                name="contactNumber"
+                title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                type="text"
+                placeholder="Enter phone number"
+                required
+              />
+            </Form.Item>
+
+            <Form.Item label=" ">
+              <Button type="primary" htmlType="submit">
+                Add contact
+              </Button>
+            </Form.Item>
+          </Form>
+
+          {/* <FormStyled onSubmit={handleSubmit}>
             <FormLabel>
               <p>Name:</p>
               <FormInput
@@ -95,7 +147,7 @@ const ContactsPage = () => {
             </FormLabel>
 
             <FormButton type="submit">Add contact</FormButton>
-          </FormStyled>
+          </FormStyled> */}
           {contacts && contacts.length > 0 && <Filter />}
           {contacts && contacts.length > 0 && <ContactList />}
         </FormContainer>
