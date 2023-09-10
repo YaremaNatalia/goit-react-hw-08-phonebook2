@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import img from './wallpaper.jpg';
 
 export const Container = styled.div`
   width: 100vw;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 50px;
-  background-image: url('./wallpaper.jpg');
+  background-image: url(${img});
   background-size: cover;
   background-position: center;
 
@@ -18,8 +19,11 @@ export const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-      url('./wallpaper.jpg');
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1)
+      ),
+      url(${img});
     background-size: cover;
     z-index: -1;
     pointer-events: none;

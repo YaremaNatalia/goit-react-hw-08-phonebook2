@@ -14,4 +14,5 @@ export const HomeTitle = styled.h1`
   font-weight: 500px;
   font-size: 48px;
   text-align: center;
+  color: #d4afaf;
 `;

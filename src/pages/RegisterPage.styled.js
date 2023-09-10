@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const FormContainer = styled.div`
   padding: 30px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 `;
 export const FormWrapper = styled.div`
   margin: 0 auto 20px;
