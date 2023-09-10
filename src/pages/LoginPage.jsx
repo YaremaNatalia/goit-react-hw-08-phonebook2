@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { FormContainer, FormTitle, FormWrapper } from './RegisterPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserThunk } from 'redux/authentifServices';
