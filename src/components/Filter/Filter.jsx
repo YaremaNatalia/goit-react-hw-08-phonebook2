@@ -5,7 +5,6 @@ import { selectFilter } from 'redux/selectors';
 import { setFilter } from 'redux/contactsReducer';
 import { FormGroup, FormLabel } from './Filter.styled';
 
-
 export const Filter = () => {
   const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
@@ -25,14 +24,6 @@ export const Filter = () => {
           onChange={onFilterChange}
           required
         />
-        ;
-        {/* <FormInput
-          type="text"
-          placeholder="Enter letters or digits to filter your contacts"
-          required
-          value={filter}
-          onChange={onFilterChange}
-        /> */}
       </FormLabel>
     </FormGroup>
   );

@@ -20,6 +20,7 @@ export const FormTitle = styled.h2`
   text-align: center;
   font-size: 20px;
   margin-bottom: 10px;
+  color: #fff;
 `;
 
 // export const FormStyled = styled.form`

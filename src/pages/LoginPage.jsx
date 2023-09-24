@@ -9,12 +9,8 @@ import { Navigate } from 'react-router-dom';
 const LoginPage = () => {
   const [form] = Form.useForm();
   const onFinish = values => {
-    console.log('Success:', values);
-    dispatch(
-      loginUserThunk({
-        values,
-      })
-    );
+    // console.log('Success:', values);
+    dispatch(loginUserThunk(values));
     form.resetFields();
   };
   const onFinishFailed = errorInfo => {
@@ -24,21 +20,6 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const authentificated = useSelector(selectAuthentificated);
 
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-
-  //   const form = event.currentTarget;
-
-  //   const email = form.elements.email.value;
-  //   const password = form.elements.password.value;
-
-  //   dispatch(
-  //     loginUserThunk({
-  //       email,
-  //       password,
-  //     })
-  //   );
-  // };
   if (authentificated) return <Navigate to="/contacts" />;
   return (
     <FormContainer>
@@ -111,35 +92,6 @@ const LoginPage = () => {
           </Form.Item>
         </Form>
       </FormWrapper>
-
-      {/* <FormStyled onSubmit={handleSubmit}>
-        <FormLabel>
-          <p>Email:</p>
-          <FormInput
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            required
-            autoComplete="on"
-          />
-        </FormLabel>
-
-        <FormLabel>
-          <p>Password:</p>
-          <FormInput
-            name="password"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            required
-            minLength={7}
-            autocomplete="current-password"
-          />
-        </FormLabel>
-
-        <FormButton type="submit">Sign In</FormButton>
-      </FormStyled> */}
     </FormContainer>
   );
 };
