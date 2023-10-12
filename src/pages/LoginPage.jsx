@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { FormContainer, FormTitle, FormWrapper } from './RegisterPage.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUserThunk } from 'redux/authentifServices';
-import { selectAuthentificated } from 'redux/selectors';
-import { Navigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const [form] = Form.useForm();
   const onFinish = values => {
     // console.log('Success:', values);
@@ -17,10 +17,6 @@ const LoginPage = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const dispatch = useDispatch();
-  const authentificated = useSelector(selectAuthentificated);
-
-  if (authentificated) return <Navigate to="/contacts" />;
   return (
     <FormContainer>
       <FormTitle>Login into your account</FormTitle>
